@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1d1f2d</color>
+    <color name="colorPrimaryDark">#15161e</color>
+    <color name="colorAccent">#189be7</color>
+
+    <!-- Array Colors Palate   -->
+    <color name="blue">#42A5F5</color>
+    <color name="yellow">#D4E157</color>
+    <color name="bron">#FFEE58</color>
+    <color name="pink">#EC407A</color>
+    <color name="mov">#AB47BC</color>
+
+    <!--Spectrum Palate-->
+    <array name="demo_colors">
+        <item>@color/blue</item>
+        <item>@color/yellow</item>
+        <item>@color/mov</item>
+        <item>@color/bron</item>
+        <item>@color/pink</item>
+    </array>
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScroll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    tools:context=".activities.editor.EditActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/et_editLayoutTitle"
+            android:inputType="textCapCharacters"
+            android:textSize="25sp"
+            android:layout_marginBottom="10dp"/>
+        <EditText
+            android:id="@+id/et_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_title"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:gravity="top|start"
+            android:hint="@string/et_editLayoutNote"
+            android:inputType="textMultiLine"
+            android:minLines="5"
+            android:textSize="25sp" />
+
+        <com.thebluealliance.spectrum.SpectrumPalette
+            android:id="@+id/palate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/et_note"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            app:spectrum_colors="@array/demo_colors"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

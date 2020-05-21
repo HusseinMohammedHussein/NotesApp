@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NotesApp</string>
+    <string name="et_editLayoutTitle">Title</string>
+    <string name="et_editLayoutNote">Note</string>
+    <string name="saveIcon_menu">Save</string>
+    <string name="date">14 May</string>
+    <string name="note_mainactivity">Note</string>
+    <string name="title_mainactivity">Title</string>
+    <string name="updateIcon_menu">updateIcon_menu</string>
+    <string name="deleteIcon_menu">deleteIcon_menu</string>
+    <string name="editIcon_menu">editIcon_menu</string>
+</resources>

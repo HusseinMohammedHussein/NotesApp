@@ -1,0 +1,615 @@
+                >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                            CREATE ✍ INSERT INTO MYSQL DB - #1 - Android CRUD Tutorial
+                                • RETROFIT
+                                • PHP
+                                • MYSQL
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+1- color file:
+    - colorPrimary : #1d1f2d
+    - colorPrimaryDark: #15161e
+    - colorAccent : #189be7
+2- Style file:
+    - ctrl + D :
+        -  name="EditActivity"
+            - colorPrimary = colorAccent
+            - colorPrimaryDark = colorAccent
+            - colorAccent = colorPrimaryDark
+3- Create NewEmptyActivity called EditActivity
+4- AndroidManifest:
+    - <intent-filter>
+        <action name="......VIEW"/>
+      </intent-filter>
+      <activity
+            theme = "@style/editActivity"
+            launchMode = "singleTask"/>
+5- MainActivity.class
+    Object of FloatingActionButton
+        fab.setOnClickListener(View ->
+        startActivity(this, EditActivity.class));
+6- EditActivity layout:
+    <NestedScrollView>
+        <EditYText
+            id = title
+            textSize = 25dp
+            inputType = "textCapSentences"/>
+        <EditYText
+            id = note
+            textSize = 25dp
+            inputType = "textMultiLine"
+            minLines = "6"/>
+7- create new Resource called
+        - name = menu_editor:
+        - ResourceType = Menu
+                -  <item
+                        id = save
+                        title = save
+                        icon = ic_check
+                        showAsAction = always
+
+8- EditActivity.class:
+    ProgressDialog pro;
+    ApiInterface interface;
+    onCreate(){
+        pro = new ProgressDialog(this);
+        pro.setMessage("message");
+    }
+    onCreateOptionMenu(){
+        MenuInflater inf = getMenuInflater();
+        inf.inflate(R.menu.menu_editor, menu);
+        return true;
+    }
+    onOptionItemSelect(MenuItem item){
+        switch (item.getItemId) {
+            case R.id.save:
+                String title = edittext.getText.toString();
+                String note = edittext.getText.toString();
+                int color = -2184710;
+                if(title.isEmpty()){
+                    edittext.setError("");
+                }else if(note.isEmpty()){
+                    edittext.setError("");
+                }else{
+                saveNote(title, note, color);
+                }
+                return true;
+            default:
+                return super.opOptionItemSelected(item);
+        }
+    }
+
+    private void saveNote(String title, String note, int color){
+        pro.show();
+        interface = APIClint.getApiClint().create(ApiInterface.class).saveNote(
+                title, note, color);
+
+        Call<Note> call = interface;
+        call.enqueue(new CallBack(){
+           onResponse(){
+                if(response.isSuccess() && response.body() != null){
+                    Boolean succ = response.body().getSuccess();
+                    if(succ){
+                         Toast. response.body().getMessage());
+                         finish();
+                    }else{
+                         Toast. response.body().getMessage());
+                    }
+                }
+            }
+           onFailure(){
+                Toast. t.getLocalizedMessage());
+            }
+        })
+
+
+    }
+
+9- Create APIClint.class:
+    private static final BASE_URL = "";
+    private Retrofit return;
+
+    public static Retrofit getApiClint(){
+        if(ret == null){
+            ret = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactor(GsonConverterFactor.create())
+                .build();
+        }
+        return ret;
+    }
+
+10- create NoteModel:
+    @SerializedName("id")     private int id;
+
+    @SerializedName("title")     private String title;
+
+    @SerializedName("note")    private String note;
+
+    @SerializedName("color")    private int color;
+
+    @SerializedName("date")    private String date;
+
+    @SerializedName("success")    private boolean success;
+
+    @SerializedName("message")    private String message;
+
+    - get&set generate...
+
+- Create ApiInterface.class{
+        @FormUrlEncoded
+        @POST("save.php")
+        Call<Note> saveNote(
+            @Field("title") String title,
+            @Field("note") String note,
+            @Field("color") String color
+        );
+    }
+
+
+            >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                        COLOR PICKER 🎨 PALETTE ANDROID - #2 - Android CRUD Tutorial
+                        • RETROFIT
+                        • PHP
+                        • MYSQL HD
+            <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+- add Spectrum COLOR PICKER Lib.
+
+-  add array colors in Color file:
+    <color name="white"></color>
+    <color name="white"></color>
+    <color name="white"></color>
+    <color name="white"></color>
+    <color name="white"></color>
+
+    <array name="demo_colors">
+        <item>@Color/white</item>
+        <item>@Color/white</item>
+        <item>@Color/white</item>
+        <item>@Color/white</item>
+        <item>@Color/white</item>
+    </array>
+
+- EditActivity layout:
+    <SpectrumPalette
+        id = palate
+        app:spectrum_colors="@array/demo_colors"
+        marginBottom = "20dp"
+        marginTop ="20dp"/>
+
+- EditActivity class:
+    int color;
+    initialize SpectrumPalette palate;
+    onCreate(){
+        palate.setOnColorSelectedListener(
+            clr -> color = clr
+        );
+
+        // Test -> palate.setOnColorSelectedListener()
+        palate.setSelectedColor(getResources().getColor(R.color.name));
+        color = getResources().getColor(R.color.name);
+
+    }
+
+            >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                ANDROID ↔ MVP BASIC - #3 - Android CRUD Tutorial
+                    • RETROFIT
+                    • PHP
+                    • MYSQL HD
+                    • MVP
+            <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+- create package foreach file contains code:
+            • Model Package
+            • API Package
+            • Activities Package
+                • main
+                • other activity
+- EditorActivity Package:
+    • create EditorView interface class{
+            void showProgress();
+            void hideProgress();
+            void onAddSuccess(String message);
+            void onAddError(String message);
+        }
+
+    • create EditorPresenter class{
+            private EditorView editorViewInterface;
+
+            constructor of EditorPresenter(EditorView v);
+
+            saveNote(){
+                Move saveNote() From EditorActivity_Class
+            }
+
+        }
+    • EditActivity Class implements EditorView{
+
+            EditorPresenter pressenter;
+            onCreate(){
+                pressenter = new EditorPresenter(this);
+            }
+
+      }
+
+        >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            READ DATA 📖 DISPLAY TO RECYCLERVIEW - #4 - Android CRUD Tutorial
+                • RETROFIT
+                • PHP
+                • MYSQL
+                • MVP
+        <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+- MainActivity layout:
+    <SwipeRefreshLayout
+        id = swipe_refresh>
+        <RecycleView
+            id = rv_mainactivity/>
+    </SwipeRefreshLayout>
+
+- create item_view_cardView layout:
+    <CardView
+        id = card_item
+        marginL = 10dp
+        marginR = 10dp
+        marginT = 4dp
+        marginB = 4dp
+        cardCornerRadius = 2dp
+        cardElevation = 1dp
+        clickable = true
+        focusable = true
+        foreground = "?attr/selectableItemBackground">
+
+            <LinearLayout
+                id = line
+                orientation= ver
+                background = #49000000 />
+
+            <RelativeLayout
+                padding = 10dp
+                marginS = 10dp
+                marginL = 10dp>
+                <TextView
+                    id  = title
+                    text = title
+                    textSize = 18sp
+                    textColor = @android:color/black/>
+                <TextView
+                    id  = note
+                    text = note
+                    below = title/>
+                <TextView
+                    id  = date
+                    text = 14 May
+                    below = note
+                    gravity = "end"/>
+
+            </RelativeLayout>
+    </CardView
+
+- Create Adapter{
+        Context con;
+        List<Model> model;
+        ItemClickListener itemClickListener
+
+        AdapterConstructor(con, model, itemClickListener){
+            con
+            model
+            itemClickListener
+        }
+
+        RecycleViewAdapter(){
+            View v = LayoutInflator.from(con).inflate(R.layout.item_view, parent, false);
+            return new RecycleViewAdapter(v, itemClickListener);
+        }
+
+        public class RecycleViewHolder extends RecycleView.ViewHolder implements View.OnClickListener{
+            TextView title, note, date;
+            CardView card;
+            ItemClickListener itemClickListener;
+            RecycleViewHolder(View itemView, ItemClickListener itemClickListener){
+                super(itemView);
+                title = .....
+                note = ......
+                date = ......
+                this.itemClickListener = itemClickListener;
+                card.setOnClickListener(this);
+            }
+            onClick(View v){
+                itemClickListener.onItemClick(v, getAdapterPosition());
+            }
+        }
+
+        public interface ItemClickListener{
+            void onItemClick(View view, int position);
+        }
+    }
+
+- Create ViewInterface{
+        void showLoading();
+        void hideLoading();
+        void onGetResult(List<Model> model);
+        void onErrorLoading(String message);
+    }
+
+
+- APIClint class{
+
+        @GET("note.php")
+        Call<Model> getNote();
+    }
+- Create Note.php 000WebHost{
+
+        <?php
+            header("Content-type:application/json");
+
+            require_once('connect.php');
+            $query = mysqli_query($conn, "Select * FROM `notes`");
+            $response = array();
+            while( $row = mysqli_fetch_assoc($query)){
+                array_push($response,
+                            array(
+                                'id' =>$row['id'],
+                                'title' =>$row['title'],
+                                'note' =>$row['note'],
+                                'date' =>$row['date'],
+                            )
+                          );
+            }
+
+            echo json_encode($response);
+        ?>
+    }
+- Creater Presenter Class{
+
+        private ViewInterface interfaceView;
+
+        public Presenter(ViewInterface view){
+            this.interfaceView = view;
+        }
+
+        void getData(){
+            view.showLoading();
+            Call<List<Model>> call = APIClint.getApiClint.create(APIInterface.class).getNote();
+            call.enqueue(){
+                    onResponse(){
+                        view.hideLoading();
+                        if(response.isSuccessfully() && response.body() != null){
+                            view.onGetResult(response.body());
+                        }
+                    }
+                    onFailure(){
+                        view.hideLoading();
+                         view.onErrorLoading(t)
+                    }
+            }
+
+        }
+
+    }
+
+- MainActivity class implements ViewInterface{
+        initialize_SwipeRefreshLayout
+        initialize_RecycleView
+
+        Presenter pre;
+        Adapter adapter;
+        Adapter.ItemClickListener itemClickListener;
+        List<Model> model;
+
+        onCreate(){
+            recycleView.setLayoutManager(new LinearLayoutManager(this));
+            pre = enw Presenter(this);
+            pre.getData();
+            swipe.setOnRefreshListener(
+                () -> pre.getData()
+            );
+
+        }
+
+        itemClickListener = ((view, position) -> {
+
+            String title = note.get(Position).getTitle();
+            Toast.title;
+        });
+        showLoading(){
+            swipe.setRefresh(true);
+        }
+
+        hideLoading(){
+            swipe.setRefresh(false);
+        }
+        onGetResult(List<Model> model){
+            adapter = new Adapter(this, model, itemClickListener);
+            adapter.notifyDataSetChanged();
+            recycle.setAdapter(adapter);
+            model = model;
+        }
+        onErrorLoading(String message){
+            Toast.message;
+        }
+    }
+
+            >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                UPDATE ✏ DATA - #5 - Android CRUD Tutorial
+                    • RETROFIT
+                    • PHP
+                    • MYSQL
+                    • MVP
+            <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+-   drawable =>   add Edit_Icon
+             =>   add Delete_Icon
+- Menu => menu_editor =>
+                     • <item
+                            id = edit
+                            icon = ic_edit
+                            title = edit
+                     • <item
+                            id = delete
+                            icon = ic_delete
+                            title = delete
+                     • <item
+                            id = update
+                            icon = ic_update
+                            title = update
+                     • <item
+                            id = save
+                            icon = ic_save
+                            title = save
+- MainActivity.class:
+            Create private static final int INTENT_Edit = 200
+            Create private static final int INTENT_ADD = 100
+
+        itemClickListener = ((view, position){
+                int id = noteList.get(Position).getId();
+                String title = noteList.get(Position).getTitle();
+                String note = noteList.get(Position).getnote();
+                int color = noteList.get(Position).getColor();
+                Intent i = new Intent(MainActivity.this, EditorActiv.class);
+                i.putExtra("id", id);
+                i.putExtra("title", title);
+                i.putExtra("note", note);
+                i.putExtra("color", color);
+                startActivityForResult(i, INTENT_EDIT);
+                })
+
+
+        // Edit Floating
+        floating.setOnClickListener(
+            startActivityForResult(new Intent(this, EditorAcivity.class),
+                INTENT_ADD)
+        )
+
+        onActivityResult(requestCode, resultCode, intent){
+            super.....
+            if(requestCode == INTENT_ADD && resultCode == RESULT_OK){
+                    pressenter.getData();
+            }
+
+            else if(requestCode == INTENT_Edit && resultCode == RESULT_OK){
+                    pressenter.getData();
+            }
+        }
+
+- EditorActivity class:
+        int color, id;
+        String title, note;
+
+        Menu actionMenu;
+
+        onCreate(){
+            Intent i = getIntent();
+            id = i.getIntExtra("id", 0);
+            title = i.getIntExtra("title", 0);
+            note = i.getIntExtra("note", 0);
+            color = i.getIntExtra("color", 0);
+
+            setDataFromIntentExtra();
+        }
+
+        setDataFromIntentExtra(){
+            if(id != 0){
+                et_title.setText(title);
+                et_note.setText(note);
+                palate.setSelectColor(color);
+
+                getSupportActionBar().setTitle("Update Note");
+                readMode();
+            }else{
+                    palate.setSelectedColor(getResources().getColor(R.color.name));
+                    color = getResources().getColor(R.color.name);
+                    editMode();
+            }
+        }
+
+        readMode(){
+            et_title.setFocusableInTouchMode(false);
+            et_note.setFocusableInTouchMode(false);
+            et_title.setFocusable(false);
+            et_note.setFocusable(false);
+            palate.setEnable(false);
+
+        }
+
+      editMode(){
+            et_title.setFocusableInTouchMode(true);
+            et_note.setFocusableInTouchMode(true);
+            palate.setEnable(true);
+      }
+
+      onCreateOptionMenu(Menu menu){
+          MenuInflater........
+          actionMenu = menu;
+          if(id != 0){
+              actionMenu.findItem(R.id.edit).setVisible(true);
+              actionMenu.findItem(R.id.delete).setVisible(true);
+              actionMenu.findItem(R.id.save).setVisible(false);
+              actionMenu.findItem(R.id.update).setVisible(false);
+          }else{
+              actionMenu.findItem(R.id.edit).setVisible(false);
+              actionMenu.findItem(R.id.delete).setVisible(false);
+              actionMenu.findItem(R.id.save).setVisible(true);
+              actionMenu.findItem(R.id.update).setVisible(false);
+          }
+
+          return true;
+      }
+
+      onOptionItemSelect(){
+            case R.id.edit:
+                editMode();
+                  actionMenu.findItem(R.id.edit).setVisible(false);
+                  actionMenu.findItem(R.id.delete).setVisible(false);
+                  actionMenu.findItem(R.id.save).setVisible(false);
+                  actionMenu.findItem(R.id.update).setVisible(true);
+                return true;
+            case R.id.update:
+                  if(title.isEmpty()){
+                      edittext.setError("");
+                  }else if(note.isEmpty()){
+                      edittext.setError("");
+                  }else{
+                  presenter.updateNote(id, title, note, color);
+                  }
+                  return true;
+              default:
+                  return super.opOptionItemSelected(item);
+      }
+
+- ApiClient class{
+                @FormUrlEncoded
+                @POST("update.php")
+                Call<Note> updateNote(
+                    @Field("id") int id,
+                    @Field("title") String title,
+                    @Field("note") String note,
+                    @Field("color") int color
+                );
+            }
+
+- EditorPresenter class{
+
+        updateNote(id, title, note, color){
+            Call<NoteModel> call = ApiClient.getApiClient()
+                                  .create(ApiInterface.class)
+                                  .updateNote(id, title, note, color);
+
+
+            onResponse(){
+                if(response.isSuccessFully && response.body() != null){
+                    boolean success = response.body().getSuccess();
+                    if(success){
+                        viewInterface.onRequestResult(response.body().getMessage);
+                    }
+                }
+            }
+
+            onFailure(){
+                    viewInterface.onResultError(response.body().getMessage);
+            }
+
+        }
+
+
+}
