@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
     @BindView(R.id.add_icon)
     FloatingActionButton mAddIcon;
 
-    private MainPresenter presenter;
-    private MainAdapter adapter;
-    private MainAdapter.ItemClickListener itemClickListener;
-    private List<NoteModel> note;
+    MainPresenter presenter;
+    MainAdapter adapter;
+    MainAdapter.ItemClickListener itemClickListener;
+    List<NoteModel> note;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +60,11 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
     }
 
     private void floatingAction() {
-        mAddIcon.setOnClickListener(v -> {
+        mAddIcon.setOnClickListener(v ->
             startActivityForResult(
                     new Intent(MainActivity.this, EditActivity.class),
-                    INTENT_ADD);
-        });
+                    INTENT_ADD)
+        );
     }
 
     private void iniPresenter() {
@@ -121,16 +121,10 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
 
     @Override
     public void onRequestResult(List<NoteModel> notes) {
-        if (checkConnection()) {
-            hideLoading();
             adapter = new MainAdapter(this, notes, itemClickListener);
             adapter.notifyDataSetChanged();
             mRvMainactivity.setAdapter(adapter);
             note = notes;
-        } else {
-            hideLoading();
-            message("Internet Isn't Connection!");
-        }
     }
 
     @Override
