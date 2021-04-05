@@ -1,19 +1,14 @@
 package com.example.notes.activities.editor;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import com.example.notes.activities.main.MainActivity;
 import com.example.notes.api.APIClint;
 import com.example.notes.api.ApiInterface;
 import com.example.notes.model.NoteModel;
 
 import java.util.Objects;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,13 +30,12 @@ public class EditorPresenter {
             public void onResponse(@NonNull Call<NoteModel> call, @NonNull Response<NoteModel> response) {
                 editorViewInterface.hideProgress();
                 if (response.isSuccessful() && response.body() != null) {
-                    boolean success = response.body().getmSuccess();
+                    boolean success = response.body().getMSuccess();
+                    editorViewInterface.hideProgress();
                     if (success) {
-                        editorViewInterface.hideProgress();
-                        editorViewInterface.onResultSuccess(response.body().getmMessage());
+                        editorViewInterface.onResultSuccess(response.body().getMMessage());
                     } else {
-                        editorViewInterface.hideProgress();
-                        editorViewInterface.onResultError(response.body().getmMessage());
+                        editorViewInterface.onResultError(response.body().getMMessage());
                     }
                 }
             }
@@ -63,9 +57,9 @@ public class EditorPresenter {
             public void onResponse(@NonNull Call<NoteModel> call, @NonNull Response<NoteModel> response) {
                 editorViewInterface.hideProgress();
                 if (response.isSuccessful() && response.body() != null) {
-                    boolean success = response.body().getmSuccess();
+                    boolean success = response.body().getMSuccess();
                     if (success) {
-                        editorViewInterface.onResultSuccess(response.body().getmMessage());
+                        editorViewInterface.onResultSuccess(response.body().getMMessage());
                     }
                 }
             }
@@ -86,9 +80,9 @@ public class EditorPresenter {
             public void onResponse(@Nullable Call<NoteModel> call, @Nullable Response<NoteModel> response) {
                 editorViewInterface.hideProgress();
                 if (Objects.requireNonNull(response).isSuccessful() && response.body() != null) {
-                    boolean success = response.body().getmSuccess();
+                    boolean success = response.body().getMSuccess();
                     if (success) {
-                        editorViewInterface.onResultSuccess(response.body().getmMessage());
+                        editorViewInterface.onResultSuccess(response.body().getMMessage());
                     }
                 }
             }

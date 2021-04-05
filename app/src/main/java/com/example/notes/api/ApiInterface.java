@@ -11,6 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
+
     @FormUrlEncoded
     @POST("save.php")
     Call<NoteModel>  saveNote(
@@ -19,7 +20,7 @@ public interface ApiInterface {
             @Field("color") int color
     );
 
-    @GET("notes.php")
+    @GET("getnotes.php")
     Call<List<NoteModel>> getNotes();
 
     @FormUrlEncoded

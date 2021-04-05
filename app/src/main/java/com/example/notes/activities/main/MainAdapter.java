@@ -38,10 +38,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
     @Override
     public void onBindViewHolder(@NonNull MainAdapterViewHolder holder, int position) {
         NoteModel notePosition = noteList.get(position);
-        holder.mTvTitle.setText(notePosition.getmTitle());
-        holder.mTvNote.setText(notePosition.getmNote());
-        holder.mTvDate.setText(notePosition.getmDate());
-        holder.mCardItem.setCardBackgroundColor(notePosition.getmColor());
+        holder.mTvTitle.setText(notePosition.getMTitle());
+        holder.mTvNote.setText(notePosition.getMNote());
+        holder.mTvDate.setText(notePosition.getMDate());
+        holder.mCardItem.setCardBackgroundColor(notePosition.getMColor());
     }
 
     @Override

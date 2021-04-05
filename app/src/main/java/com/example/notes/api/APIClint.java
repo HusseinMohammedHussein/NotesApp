@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClint {
-    private static final String BASE_URL = "https://crdudbapp.000webhostapp.com/noteapi/";
+    private static final String BASE_URL = "https://crdudbapp.000webhostapp.com/notesapi/";
     private static Retrofit retrofit;
 
     public static Retrofit getApiClint() {

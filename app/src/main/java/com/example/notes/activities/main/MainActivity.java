@@ -84,10 +84,10 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
         /*ItemClick*/
         itemClickListener = ((view, position) -> {
             NoteModel notePosition = note.get(position);
-            int id = notePosition.getmId();
-            String title = notePosition.getmTitle();
-            String note = notePosition.getmNote();
-            int color = notePosition.getmColor();
+            int id = notePosition.getMId();
+            String title = notePosition.getMTitle();
+            String note = notePosition.getMNote();
+            int color = notePosition.getMColor();
 
             Intent intent = new Intent(this, EditActivity.class);
             intent.putExtra("id", id);
